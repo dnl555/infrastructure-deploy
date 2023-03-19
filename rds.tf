@@ -8,15 +8,15 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_db_instance" "default" {
-  allocated_storage   = 10
-  db_name             = "mydb"
-  engine              = "aurora-postgresql"
-  engine_version      = "12.8"
-  instance_class      = "db.t3.micro"
-  multi_az            = false
-  username            = var.db_username
-  password            = var.db_password
-  subnet_group_name   = aws_db_subnet_group.default.name
-  skip_final_snapshot = true
+  allocated_storage    = 10
+  name                 = "mydb"
+  engine               = "aurora-postgresql"
+  engine_version       = "12.8"
+  instance_class       = "db.t3.micro"
+  multi_az             = false
+  username             = var.db_username
+  password             = var.db_password
+  db_subnet_group_name = aws_db_subnet_group.default.name
+  skip_final_snapshot  = true
 }
 
