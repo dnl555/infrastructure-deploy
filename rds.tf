@@ -13,7 +13,7 @@ resource "aws_db_instance" "default" {
   engine                 = "postgres"
   engine_version         = "12.7"
   instance_class         = "db.t2.micro"
-  multi_az               = false
+  multi_az               = true
   username               = var.db_username
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.default.name
