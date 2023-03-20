@@ -54,3 +54,45 @@ resource "aws_route_table_association" "public_subnet_asso" {
   subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
   route_table_id = aws_route_table.second_rt.id
 }
+
+resource "aws_security_group" "alb-sg" {
+  name   = "web-alb"
+  vpc_id = aws_vpc.main.id
+
+  ingress = [
+    {
+      description      = "inbound alb https"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      from_port        = 443
+      to_port          = 443
+      protocol         = "tcp"
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+    {
+      description      = "inbound alb http"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      from_port        = 80
+      to_port          = 80
+      protocol         = "tcp"
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    }
+  ]
+
+  egress = [{
+    description      = "outbound any"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = false
+  }]
+}
