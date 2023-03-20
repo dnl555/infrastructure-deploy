@@ -13,6 +13,10 @@ variable "db_password" {
   type = string
 }
 
+variable "api_token" {
+  type = string
+}
+
 variable "public_subnet_cidrs" {
   type        = list(string)
   description = "Public Subnet CIDR values"
