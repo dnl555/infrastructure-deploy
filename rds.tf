@@ -9,9 +9,9 @@ resource "aws_db_subnet_group" "default" {
 
 resource "aws_db_instance" "default" {
   db_name              = "mydb"
-  engine               = "aurora-postgresql"
-  engine_version       = "11.15"
-  instance_class       = "db.t4g.medium"
+  engine               = "postgres"
+  engine_version       = "12.7"
+  instance_class       = "db.t2.micro"
   multi_az             = false
   username             = var.db_username
   password             = var.db_password
