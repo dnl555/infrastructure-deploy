@@ -26,6 +26,18 @@ resource "aws_iam_role" "api-taskexecution" {
             "ecr:BatchCheckLayerAvailability",
             "ecr:GetDownloadUrlForLayer",
             "ecr:BatchGetImage",
+            "application-autoscaling:*",
+            "cloudwatch:DescribeAlarms",
+            "cloudwatch:PutMetricAlarm",
+            "cloudwatch:DeleteAlarms",
+            "cloudwatch:DescribeAlarmHistory",
+            "cloudwatch:DescribeAlarms",
+            "cloudwatch:DescribeAlarmsForMetric",
+            "cloudwatch:GetMetricStatistics",
+            "cloudwatch:ListMetrics",
+            "cloudwatch:PutMetricAlarm",
+            "cloudwatch:DisableAlarmActions",
+            "cloudwatch:EnableAlarmActions",
           ]
           Effect = "Allow"
           Resource = [
