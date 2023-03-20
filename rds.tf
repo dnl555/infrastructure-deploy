@@ -8,15 +8,17 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_db_instance" "default" {
-  db_name              = "mydb"
-  allocated_storage    = 10
-  engine               = "postgres"
-  engine_version       = "12.7"
-  instance_class       = "db.t2.micro"
-  multi_az             = false
-  username             = var.db_username
-  password             = var.db_password
-  db_subnet_group_name = aws_db_subnet_group.default.name
-  skip_final_snapshot  = true
+  db_name                = "mydb"
+  allocated_storage      = 10
+  engine                 = "postgres"
+  engine_version         = "12.7"
+  instance_class         = "db.t2.micro"
+  multi_az               = false
+  username               = var.db_username
+  password               = var.db_password
+  db_subnet_group_name   = aws_db_subnet_group.default.name
+  skip_final_snapshot    = true
+  vpc_security_group_ids = [aws_security_group.db-sg.id]
+
 }
 

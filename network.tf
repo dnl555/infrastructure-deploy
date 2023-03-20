@@ -97,13 +97,33 @@ resource "aws_security_group" "alb-sg" {
   }]
 }
 
+resource "aws_security_group" "db-sg" {
+  name   = "db-sg"
+  vpc_id = aws_vpc.main.id
+
+  ingress = [
+    {
+      description      = "inbound db postgres internal"
+      cidr_blocks      = ["10.0.0.0/8"]
+      ipv6_cidr_blocks = ["::/0"]
+      from_port        = 5432
+      to_port          = 54332
+      protocol         = "tcp"
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    },
+  ]
+
+}
+
 
 
 resource "aws_eip" "natgateway" {
   vpc = true
 }
 
-resource "aws_nat_gateway" "example" {
+resource "aws_nat_gateway" "mynatgateway" {
   subnet_id     = aws_subnet.public_subnets[0].id
   allocation_id = aws_eip.natgateway.id
 
