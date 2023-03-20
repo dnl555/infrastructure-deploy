@@ -53,8 +53,8 @@ resource "aws_ecs_task_definition" "api-task" {
 
       portMappings = [
         {
-          containerPort = "8181"
-          hostPort      = "8181"
+          containerPort = 8181
+          hostPort      = 8181
           protocol      = "tcp"
         }
       ]
