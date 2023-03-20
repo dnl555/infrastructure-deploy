@@ -6,7 +6,7 @@ resource "aws_cloudwatch_log_group" "api" {
 resource "aws_ecs_cluster" "api-cluster" {
   name = "api-cluster"
 
-  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
+  capacity_providers = ["FARGATE_SPOT"]
 
   configuration {
     execute_command_configuration {
@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "api-task" {
   family = "api-task"
 
   network_mode             = "awsvpc"
-  requires_compatibilities = ["FARGATE"]
+  requires_compatibilities = ["FARGATE_SPOT"]
 
   task_role_arn      = aws_iam_role.api-taskexecution.arn
   execution_role_arn = aws_iam_role.api-taskexecution.arn
@@ -67,7 +67,7 @@ resource "aws_ecs_task_definition" "api-task" {
 resource "aws_ecs_service" "api-service" {
   name                               = "api-service"
   cluster                            = aws_ecs_cluster.api-cluster.id
-  task_definition                    = aws_ecs_task_definition.api-task
+  task_definition                    = aws_ecs_task_definition.api-task.arn
   desired_count                      = 2
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
