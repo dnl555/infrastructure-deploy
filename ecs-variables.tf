@@ -14,7 +14,7 @@ locals {
     },
     {
       name  = "POSTGRES_PORT"
-      value = aws_db_instance.default.port
+      value = tostring(aws_db_instance.default.port)
     },
     {
       name  = "POSTGRES_USER"
