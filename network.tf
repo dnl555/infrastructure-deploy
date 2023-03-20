@@ -107,7 +107,7 @@ resource "aws_nat_gateway" "example" {
   depends_on = [aws_internet_gateway.gw]
 }
 
-resource "aws_route_table_private" "third_rt" {
+resource "aws_route_table" "third_rt" {
   vpc_id = aws_vpc.main.id
 
   route {
