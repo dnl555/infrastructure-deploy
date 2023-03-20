@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "api-task" {
   family = "api-task"
 
   network_mode             = "awsvpc"
-  requires_compatibilities = ["FARGATE_SPOT"]
+  requires_compatibilities = ["FARGATE_SPOT", "FARGATE"]
 
   task_role_arn      = aws_iam_role.api-taskexecution.arn
   execution_role_arn = aws_iam_role.api-taskexecution.arn
@@ -74,7 +74,7 @@ resource "aws_ecs_service" "api-service" {
   health_check_grace_period_seconds  = 0
   enable_execute_command             = true
 
-  launch_type         = "FARGATE"
+  launch_type         = "FARGATE_SPOT"
   scheduling_strategy = "REPLICA"
 
   load_balancer {
