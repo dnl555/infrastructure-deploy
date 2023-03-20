@@ -46,15 +46,15 @@ resource "aws_ecs_task_definition" "api-task" {
   memory = "512"
   cpu    = "256"
 
-  container_definitions = [
+  container_definitions = jsonencode([
     {
       image = "${aws_ecr_repository.apirepo.repository_url}:api"
       name  = "api"
 
       portMappings = [
         {
-          containerPort = 8181
-          hostPort      = 8181
+          containerPort = "8181"
+          hostPort      = "8181"
           protocol      = "tcp"
         }
       ]
@@ -71,7 +71,7 @@ resource "aws_ecs_task_definition" "api-task" {
       environment = local.api_ecs_env_vars
       secrets     = local.api_ecs_secrets
     },
-  ]
+  ])
 }
 
 resource "aws_ecs_service" "api-service" {
