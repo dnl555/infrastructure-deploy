@@ -56,7 +56,7 @@ resource "aws_route_table_association" "public_subnet_asso" {
 }
 
 resource "aws_security_group" "alb-sg" {
-  name   = "web-alb"
+  name   = "api-alb"
   vpc_id = aws_vpc.main.id
 
   ingress = [
