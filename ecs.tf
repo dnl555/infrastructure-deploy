@@ -74,7 +74,7 @@ resource "aws_ecs_service" "api-service" {
   health_check_grace_period_seconds  = 0
   enable_execute_command             = true
 
-  launch_type         = "FARGATE_SPOT"
+  launch_type         = "FARGATE"
   scheduling_strategy = "REPLICA"
 
   load_balancer {
