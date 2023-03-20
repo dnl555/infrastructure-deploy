@@ -6,15 +6,15 @@ locals {
     },
     {
       name  = "POSTGRES_DB"
-      value = "dbtobenamed"
+      value = aws_db_instance.default.name
     },
     {
       name  = "POSTGRES_SERVER"
-      value = "tobenamed"
+      value = aws_db_instance.default.address
     },
     {
       name  = "POSTGRES_PORT"
-      value = "5432"
+      value = aws_db_instance.default.port
     },
     {
       name  = "POSTGRES_USER"
