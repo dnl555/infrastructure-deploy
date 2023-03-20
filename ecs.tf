@@ -46,7 +46,7 @@ resource "aws_ecs_task_definition" "api-task" {
   memory = "512"
   cpu    = "256"
 
-  container_definitions = jsonencode([
+  container_definitions = [
     {
       image = "${aws_ecr_repository.apirepo.repository_url}:api"
       name  = "api"
@@ -71,7 +71,7 @@ resource "aws_ecs_task_definition" "api-task" {
       environment = local.api_ecs_env_vars
       secrets     = local.api_ecs_secrets
     },
-  ])
+  ]
 }
 
 resource "aws_ecs_service" "api-service" {
