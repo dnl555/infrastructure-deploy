@@ -97,8 +97,15 @@ resource "aws_security_group" "alb-sg" {
   }]
 }
 
+
+
+resource "aws_eip" "natgateway" {
+  vpc = true
+}
+
 resource "aws_nat_gateway" "example" {
-  subnet_id = aws_subnet.public_subnets[0].id
+  subnet_id     = aws_subnet.public_subnets[0].id
+  allocation_id = aws_eip.natgateway.id
 
   tags = {
     Name = "gw NAT"
