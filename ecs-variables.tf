@@ -6,7 +6,7 @@ locals {
     },
     {
       name  = "POSTGRES_DB"
-      value = aws_db_instance.default.name
+      value = aws_db_instance.default.db_name
     },
     {
       name  = "POSTGRES_SERVER"

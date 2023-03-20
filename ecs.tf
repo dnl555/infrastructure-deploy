@@ -6,8 +6,6 @@ resource "aws_cloudwatch_log_group" "api" {
 resource "aws_ecs_cluster" "api-cluster" {
   name = "api-cluster"
 
-  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
-
   configuration {
     execute_command_configuration {
       logging = "OVERRIDE"
@@ -21,6 +19,18 @@ resource "aws_ecs_cluster" "api-cluster" {
   setting {
     name  = "containerInsights"
     value = "enabled"
+  }
+}
+
+resource "aws_ecs_cluster_capacity_providers" "api" {
+  cluster_name = aws_ecs_cluster.api-cluster.name
+
+  capacity_providers = ["FARGATE"]
+
+  default_capacity_provider_strategy {
+    base              = 1
+    weight            = 100
+    capacity_provider = "FARGATE"
   }
 }
 

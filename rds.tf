@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "default" {
 
 resource "aws_db_instance" "default" {
   allocated_storage    = 25
-  name                 = "mydb"
+  db_name              = "mydb"
   engine               = "aurora-postgresql"
   engine_version       = "11.15"
   instance_class       = "db.t4g.medium"
